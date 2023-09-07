@@ -1,0 +1,4 @@
+- Created requirements file and wrote down the requirements
+- Basis of the Connect Four pygame version has been added 
+- I learned that the most suitable algorithm for creating game opponent AIs is minimax
+- Next week I'll add to the project whatever is required in the next week's assignment
