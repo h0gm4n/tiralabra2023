@@ -1,33 +1,23 @@
 import unittest
-import src.connect4 as connect4
+import numpy as np
+import math
+import src.connect4_ui as connect4
 import src.connect4_ai as connect4_ai
+import src.connect4_utils as connect4_utils
 
 
 class TestConnect4(unittest.TestCase):
 
-    def test_four_in_a_row_wins(self):
-        board = connect4.create_board()
-        connect4_ai.drop_piece(board, 0, 0, 1)
-        connect4_ai.drop_piece(board, 0, 1, 1)
-        connect4_ai.drop_piece(board, 0, 2, 1)
-        connect4_ai.drop_piece(board, 0, 3, 1)
-        self.assertEqual(connect4.winning_move(board, 1), True)
-
-    def test_horizontal_pressure_suggests_best_move(self):
-        board = connect4.create_board()
-        connect4_ai.drop_piece(board, 0, 0, 1)
-        connect4_ai.drop_piece(board, 0, 1, 1)
-        connect4_ai.drop_piece(board, 0, 2, 1)
-
-        self.assertEqual(connect4_ai.pick_best_move(board, 2), 3)
-
-    def test_vertical_pressure_suggests_best_move(self):
-        board = connect4.create_board()
-        connect4_ai.drop_piece(board, 0, 0, 1)
-        connect4_ai.drop_piece(board, 1, 0, 1)
-        connect4_ai.drop_piece(board, 2, 0, 1)
-
-        self.assertEqual(connect4_ai.pick_best_move(board, 2), 0)
+    def test_minimax(self):
+        board = np.zeros((6, 7))
+        board[5][3] = 1
+        board[4][3] = 2
+        board[5][4] = 1
+        print(board)
+        col, minmax_score = connect4_ai.minimax(board, 5, -math.inf, math.inf, True)
+        self.assertEqual((col, minmax_score), (5, 9))
+        #connect4_ai.minimax()
+        #pass
 
 
 if __name__ == '__main__':
