@@ -1,4 +1,4 @@
 # Testing document
 
-Current testing coverage:
+Current testing coverage:\
 ![Coverage](test_coverage.png)
