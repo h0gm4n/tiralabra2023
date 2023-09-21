@@ -10,7 +10,7 @@ def evaluate_window(window, piece, score):
 
     if window.count(piece) == 4:
         score += 100
-    elif window.count(piece) == 3 and window.count(constants.EMPTY) == 1:
+    if window.count(piece) == 3 and window.count(constants.EMPTY) == 1:
         score += 5
     elif window.count(piece) == 2 and window.count(constants.EMPTY) == 2:
         score += 2
@@ -97,7 +97,6 @@ def minimax(board, depth, alpha, beta, maximizing_player):
             alpha = max(alpha, value)
             if alpha >= beta:
                 break
-        #print(column)
         return column, value
 
     else:

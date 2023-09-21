@@ -1,5 +1,4 @@
 import numpy as np
-import random
 import pygame
 import sys
 import math
@@ -20,35 +19,36 @@ def run_game():
     def draw_board(board):
         for c in range(constants.COLUMN_COUNT):
             for r in range(constants.ROW_COUNT):
-                pygame.draw.rect(screen, constants.BLUE, (c * SQUARESIZE, r * SQUARESIZE + SQUARESIZE, SQUARESIZE, SQUARESIZE))
+                pygame.draw.rect(screen, constants.BLUE, (c * constants.SQUARESIZE,
+                                                          r * constants.SQUARESIZE + constants.SQUARESIZE,
+                                                          constants.SQUARESIZE, constants.SQUARESIZE))
                 pygame.draw.circle(screen, constants.BLACK, (
-                int(c * SQUARESIZE + SQUARESIZE / 2), int(r * SQUARESIZE + SQUARESIZE + SQUARESIZE / 2)), RADIUS)
+                int(c * constants.SQUARESIZE + constants.SQUARESIZE / 2),
+                int(r * constants.SQUARESIZE + constants.SQUARESIZE + constants.SQUARESIZE / 2)), constants.RADIUS)
 
         for c in range(constants.COLUMN_COUNT):
             for r in range(constants.ROW_COUNT):
                 if board[r][c] == 1:
                     pygame.draw.circle(screen, constants.RED, (
-                    int(c * SQUARESIZE + SQUARESIZE / 2), height - int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
+                    int(c * constants.SQUARESIZE + constants.SQUARESIZE / 2),
+                    height - int(r * constants.SQUARESIZE + constants.SQUARESIZE / 2)), constants.RADIUS)
                 elif board[r][c] == 2:
                     pygame.draw.circle(screen, constants.YELLOW, (
-                    int(c * SQUARESIZE + SQUARESIZE / 2), height - int(r * SQUARESIZE + SQUARESIZE / 2)), RADIUS)
+                    int(c * constants.SQUARESIZE + constants.SQUARESIZE / 2),
+                    height - int(r * constants.SQUARESIZE + constants.SQUARESIZE / 2)), constants.RADIUS)
         pygame.display.update()
 
     board = create_board()
     print_board(board)
     game_over = False
-    turn = random.randint(constants.PLAYER, constants.AI)
+    turn = constants.PLAYER
 
     pygame.init()
 
-    SQUARESIZE = 100
-
-    width = constants.COLUMN_COUNT * SQUARESIZE
-    height = (constants.ROW_COUNT + 1) * SQUARESIZE
+    width = constants.COLUMN_COUNT * constants.SQUARESIZE
+    height = (constants.ROW_COUNT + 1) * constants.SQUARESIZE
 
     size = (width, height)
-
-    RADIUS = int(SQUARESIZE / 2 - 5)
 
     screen = pygame.display.set_mode(size)
     draw_board(board)
@@ -63,21 +63,21 @@ def run_game():
                 sys.exit()
 
             if event.type == pygame.MOUSEMOTION:
-                pygame.draw.rect(screen, constants.BLACK, (0, 0, width, SQUARESIZE))
+                pygame.draw.rect(screen, constants.BLACK, (0, 0, width, constants.SQUARESIZE))
                 posx = event.pos[0]
                 if turn == 0:
-                    pygame.draw.circle(screen, constants.RED, (posx, int(SQUARESIZE / 2)), RADIUS)
+                    pygame.draw.circle(screen, constants.RED, (posx, int(constants.SQUARESIZE / 2)), constants.RADIUS)
                 else:
-                    pygame.draw.circle(screen, constants.YELLOW, (posx, int(SQUARESIZE / 2)), RADIUS)
+                    pygame.draw.circle(screen, constants.YELLOW, (posx, int(constants.SQUARESIZE / 2)), constants.RADIUS)
             pygame.display.update()
 
             if event.type == pygame.MOUSEBUTTONDOWN:
-                pygame.draw.rect(screen, constants.BLACK, (0, 0, width, SQUARESIZE))
+                pygame.draw.rect(screen, constants.BLACK, (0, 0, width, constants.SQUARESIZE))
 
                 # Ask for Player 1 Input
                 if turn == constants.PLAYER:
                     posx = event.pos[0]
-                    col = int(math.floor(posx / SQUARESIZE))
+                    col = int(math.floor(posx / constants.SQUARESIZE))
 
                     if connect4_utils.is_valid_location(board, col):
                         row = connect4_utils.get_next_open_row(board, col)
@@ -101,7 +101,7 @@ def run_game():
             col, minimax_score = connect4_ai.minimax(board, 5, -math.inf, math.inf, True)
 
             if connect4_utils.is_valid_location(board, col):
-                # pygame.time.wait(500)
+                pygame.time.wait(500)
                 row = connect4_utils.get_next_open_row(board, col)
                 connect4_utils.drop_piece(board, row, col, constants.AI_PIECE)
 

@@ -1,0 +1,4 @@
+[run]
+source = src
+omit = src/__init__.py,src/connect4_ui.py,src/connect4_utils.py,src/constants.py,tests/**,tests/**
+
