@@ -1,8 +1,7 @@
-
 import random
 import math
-import src.connect4_utils as connect4_utils
-import src.constants as constants
+from src import connect4_utils
+from src import constants
 
 
 # Increases or lowers the score of column
@@ -21,7 +20,8 @@ def evaluate_window(window, piece, score):
     return score
 
 
-# Checks for potential horizontal, vertical and diagonal win chances and gives a score for each column
+# Checks for potential horizontal,
+# vertical and diagonal win chances and gives a score for each column
 def score_position(board, piece):
 
     score = 0
@@ -32,29 +32,29 @@ def score_position(board, piece):
     score += center_count * 3
 
     # Check amount of pieces in horizontal windows
-    for r in range(constants.ROW_COUNT):
-        row_array = [int(i) for i in list(board[r,:])]
-        for c in range(constants.COLUMN_COUNT-3):
-            window = row_array[c:c+constants.WINDOW_LENGTH]
+    for row in range(constants.ROW_COUNT):
+        row_array = [int(i) for i in list(board[row,:])]
+        for col in range(constants.COLUMN_COUNT-3):
+            window = row_array[col:col+constants.WINDOW_LENGTH]
             score = evaluate_window(window, piece, score)
 
     # Check amount of pieces in vertical windows
-    for c in range(constants.COLUMN_COUNT):
-        col_array = [int(i) for i in list(board[:, c])]
-        for r in range(constants.ROW_COUNT-3):
-            window = col_array[r:r+constants.WINDOW_LENGTH]
+    for col in range(constants.COLUMN_COUNT):
+        col_array = [int(i) for i in list(board[:, col])]
+        for row in range(constants.ROW_COUNT-3):
+            window = col_array[row:row+constants.WINDOW_LENGTH]
             score = evaluate_window(window, piece, score)
 
     # Check amount of pieces in positive diagonal windows
-    for r in range(constants.ROW_COUNT-3):
-        for c in range(constants.COLUMN_COUNT-3):
-            window = [board[r+i][c+i] for i in range(constants.WINDOW_LENGTH)]
+    for row in range(constants.ROW_COUNT-3):
+        for col in range(constants.COLUMN_COUNT-3):
+            window = [board[row+i][col+i] for i in range(constants.WINDOW_LENGTH)]
             score = evaluate_window(window, piece, score)
 
     # Check amount of pieces in negative diagonal windows
-    for r in range(constants.ROW_COUNT-3):
-        for c in range(constants.COLUMN_COUNT-3):
-            window = [board[r+3-i][c+i] for i in range(constants.WINDOW_LENGTH)]
+    for row in range(constants.ROW_COUNT-3):
+        for col in range(constants.COLUMN_COUNT-3):
+            window = [board[row+3-i][col+i] for i in range(constants.WINDOW_LENGTH)]
             score = evaluate_window(window, piece, score)
 
     return score
@@ -76,12 +76,10 @@ def minimax(board, depth, alpha, beta, maximizing_player):
         if is_terminal:
             if connect4_utils.winning_move(board, constants.AI_PIECE):
                 return None, 1000000000000
-            elif connect4_utils.winning_move(board, constants.PLAYER_PIECE):
+            if connect4_utils.winning_move(board, constants.PLAYER_PIECE):
                 return None, -1000000000000
-            else:
-                return None, 0
-        else:
-            return None, score_position(board, constants.AI_PIECE)
+            return None, 0
+        return None, score_position(board, constants.AI_PIECE)
 
     if maximizing_player:
         value = -math.inf
@@ -99,18 +97,17 @@ def minimax(board, depth, alpha, beta, maximizing_player):
                 break
         return column, value
 
-    else:
-        value = math.inf
-        column = random.choice(valid_locations)
-        for col in valid_locations:
-            row = connect4_utils.get_next_open_row(board, col)
-            b_copy = board.copy()
-            connect4_utils.drop_piece(b_copy, row, col, constants.PLAYER_PIECE)
-            new_score = minimax(b_copy, depth-1, alpha, beta, True)[1]
-            if new_score < value:
-                value = new_score
-                column = col
-            beta = min(beta, value)
-            if alpha >= beta:
-                break
-        return column, value
+    value = math.inf
+    column = random.choice(valid_locations)
+    for col in valid_locations:
+        row = connect4_utils.get_next_open_row(board, col)
+        b_copy = board.copy()
+        connect4_utils.drop_piece(b_copy, row, col, constants.PLAYER_PIECE)
+        new_score = minimax(b_copy, depth-1, alpha, beta, True)[1]
+        if new_score < value:
+            value = new_score
+            column = col
+        beta = min(beta, value)
+        if alpha >= beta:
+            break
+    return column, value
