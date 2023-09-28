@@ -8,6 +8,6 @@ This could be a future feature. Also, the heuristic scoring system may be flawed
 
 ChatGPT or any other language models have not been used during development.
 
-Sources:
-https://www.youtube.com/watch?v=MMLtza3CZFM
+Sources: \
+https://www.youtube.com/watch?v=MMLtza3CZFM \
 https://connect4.gamesolver.org/
