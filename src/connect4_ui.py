@@ -5,9 +5,10 @@ import pygame
 from src import connect4_ai
 from src import connect4_utils
 from src import constants
+import time
 
 
-def run_game():
+def run_game(depth):
     def create_board():
         board = np.zeros((constants.ROW_COUNT, constants.COLUMN_COUNT))
         return board
@@ -103,10 +104,14 @@ def run_game():
         if turn == constants.AI and not game_over:
 
             # Run minimax with chosen depth
-            col, minimax_score = connect4_ai.minimax(board, 5, -math.inf, math.inf, True)
+            start = time.time()
+            col, minimax_score = connect4_ai.minimax(board, depth, -math.inf, math.inf, True)
+            print(col, minimax_score)
+            end = time.time()
+            print("Elapsed time", end - start)
 
             if connect4_utils.is_valid_location(board, col):
-                pygame.time.wait(500)
+                # pygame.time.wait(500)
                 row = connect4_utils.get_next_open_row(board, col)
                 connect4_utils.drop_piece(board, row, col, constants.AI_PIECE)
 

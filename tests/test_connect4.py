@@ -13,7 +13,9 @@ class TestConnect4(unittest.TestCase):
         board[5][3] = 1
         board[4][3] = 2
         board[5][4] = 1
+        print(board)
         col, minmax_score = connect4_ai.minimax(board, 5, -math.inf, math.inf, True)
+        print(col, minmax_score)
         self.assertTrue(col in [2, 5])
 
     def test_ai_chooses_winning_column(self):
