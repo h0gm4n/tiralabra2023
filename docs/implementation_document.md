@@ -15,20 +15,7 @@ https://connect4.gamesolver.org/
 
 
 ## Time Complexity
-![Time Complexity](time_complexity.png)
 
-The ratios between the AI's processing are following:
-
-2.22 (n=2/n=1)\
-8 (n=3/n=2)\
-2.69 (n=4/n=3)\
-5.95 (n=5/n=4)\
-2.71 (n=6/n=5)\
-4.16 (n=7/n=6)\
-3.7 (n=8/n=7)
-
-This suggests that between the depths of the project's best interest (1-8), \
-the time and space taken varies and is heavily dependent on how good of a \
-scenario the AI's dealt with. However, the time taken by the decision process \
-always increases with the depth of the tree. Based on the measurements, the \
-time complexity may be close to quadrantic (O(n^2)).
+The time complexity is O(d^b), where d = depth and b = amount of branches \
+The amount of branches (sqrt(7) < b < 7) depends on the chosen column - left side generating less branches \
+and right side generating more,
