@@ -6,7 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="de9d1d1a-eda0-4e98-8865-e5d771dbd06a" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/connect4.py" beforeDir="false" afterPath="$PROJECT_DIR$/connect4.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/docs/implementation_document.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/implementation_document.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/testing_document.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/testing_document.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/user_manual.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/user_manual.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/connect4_ai.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/connect4_ai.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/connect4_ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/connect4_ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/connect4_utils.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/connect4_utils.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

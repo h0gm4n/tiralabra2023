@@ -1,5 +1,6 @@
 from src import constants
 
+
 def drop_piece(board, row, col, piece):
     board[row][col] = piece
 

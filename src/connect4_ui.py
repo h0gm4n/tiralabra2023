@@ -8,7 +8,7 @@ from src import constants
 import time
 
 
-def run_game(depth):
+def run_game(depth, max_waiting_time):
     def create_board():
         board = np.zeros((constants.ROW_COUNT, constants.COLUMN_COUNT))
         return board
@@ -105,10 +105,12 @@ def run_game(depth):
 
             # Run minimax with chosen depth
             start = time.time()
-            col, minimax_score = connect4_ai.minimax(board, depth, -math.inf, math.inf, True)
-            print(col, minimax_score)
+            # col, minimax_score = connect4_ai.minimax(board, depth, -math.inf, math.inf, True)
+            col, minimax_score = connect4_ai.iterative_deepening(board, depth, max_waiting_time)
+            # print(col, minimax_score)
             end = time.time()
-            print("Elapsed time", end - start)
+
+            print("Elapsed time:", start - end)
 
             if connect4_utils.is_valid_location(board, col):
                 # pygame.time.wait(500)

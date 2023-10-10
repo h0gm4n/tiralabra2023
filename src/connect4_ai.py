@@ -1,8 +1,10 @@
 import random
 import math
+import time
 from src import connect4_utils
 from src import constants
 
+counter = 0
 
 # Increases or lowers the score of column
 def evaluate_window(window, piece, score):
@@ -65,6 +67,25 @@ def is_terminal_node(board):
     return connect4_utils.winning_move(board, constants.PLAYER_PIECE) \
            or connect4_utils.winning_move(board, constants.AI_PIECE) \
            or len(connect4_utils.get_valid_locations(board)) == 0
+
+
+def iterative_deepening(board, max_depth, max_waiting_time):
+    start_time = time.time()
+    best_move = None
+
+    for depth in range(1, max_depth + 1):
+
+        if time.time() - start_time > max_waiting_time:
+            print("Depth reached:", depth - 1)
+            print("Elapsed time:", time.time() - start_time)
+            break
+
+        move, minimax_score = minimax(board, depth, -math.inf, math.inf, True)
+
+        if move is not None:
+            best_move = move, minimax_score
+
+    return best_move
 
 
 # Minimax algorithm with alpha beta pruning

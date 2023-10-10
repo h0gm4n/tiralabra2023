@@ -8,4 +8,4 @@ There are currently three tests, all testing the algorithm with depth 5. \
 The tests mainly test the AI's capability to avoid certain losses and to \
 choose certainly winning columns.
 
-The implementation document includes the current testing of the AI's time complexity.
+The implementation document includes the information on the AI's time complexity.
