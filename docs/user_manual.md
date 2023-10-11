@@ -15,7 +15,7 @@ determined by the amount of time the player is willing to wait for each move. \
 For example, if the player sets the maximum waiting time to 30 seconds, the AI stops going \
 deeper if the calculations take more than 30 seconds.
 
-Choose the maximum waiting time (in seconds) between 5-60 seconds.
+Choose the maximum calculation time between 5-60 seconds.
 
 Run:
 > python connect4.py [maximum depth] [maximum calculation time]

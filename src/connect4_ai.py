@@ -6,8 +6,18 @@ from src import constants
 
 counter = 0
 
-# Increases or lowers the score of column
+
 def evaluate_window(window, piece, score):
+    """
+    Checks four-slot window for potential four-piece lines.
+
+    Args:
+        window: Four slot window that is evaluated
+        piece: AI's or player's piece
+        score: Current score for the column under evaluation
+    Return:
+        Current score for the column that has been changed during the window's evaluation
+    """
 
     if window.count(piece) == 4:
         score += 100
@@ -22,10 +32,16 @@ def evaluate_window(window, piece, score):
     return score
 
 
-# Checks for potential horizontal,
-# vertical and diagonal win chances and gives a score for each column
 def score_position(board, piece):
+    """
+    Generates a score heuristically for each column depending on how favorable it is for the AI.
 
+    Args:
+        board: Matrix indicating the current state of the board
+        piece: AI's or player's piece
+    Return:
+        Final score of evaluated column
+    """
     score = 0
 
     # Score center column
@@ -62,20 +78,37 @@ def score_position(board, piece):
     return score
 
 
-# Returns true if branch has winning move
 def is_terminal_node(board):
+    """
+    Checks if next move wins or if no valid locations left
+
+    Args:
+        board: Matrix indicating the current state of the board
+    Return:
+        Boolean
+    """
     return connect4_utils.winning_move(board, constants.PLAYER_PIECE) \
            or connect4_utils.winning_move(board, constants.AI_PIECE) \
            or len(connect4_utils.get_valid_locations(board)) == 0
 
 
-def iterative_deepening(board, max_depth, max_waiting_time):
+def iterative_deepening(board, max_depth, max_calculation_time):
+    """
+    Adds search depth one by one until maximum calculation time is exceeded.
+
+    Args:
+        board: Matrix indicating the current state of the board
+        max_depth: Maximum depth chosen by the player
+        max_calculation_time: Maximum calculation time chosen by the player
+    Return:
+        Best possible move for the AI
+    """
     start_time = time.time()
     best_move = None
 
     for depth in range(1, max_depth + 1):
 
-        if time.time() - start_time > max_waiting_time:
+        if time.time() - start_time > max_calculation_time:
             print("Depth reached:", depth - 1)
             print("Elapsed time:", time.time() - start_time)
             break
@@ -88,8 +121,21 @@ def iterative_deepening(board, max_depth, max_waiting_time):
     return best_move
 
 
-# Minimax algorithm with alpha beta pruning
 def minimax(board, depth, alpha, beta, maximizing_player):
+    """
+    The minimax algorithm that chooses the best possible move for the AI using a binary tree.
+    Contains alpha beta pruning, which skips the checking of unnecessary nodes and branches, thus significantly
+    speeding up the calculations.
+
+    Args:
+        board: Matrix indicating the current state of the board
+        depth: The current depth that the iterative deepening function uses when minimax is called
+        alpha: Minimum score that the maximizing player is assured of
+        beta: Maximum score that the minimizing player is assured of
+        maximizing_player: Boolean indicating whether maximizing player's move is being checked
+    Return:
+        Tuple, (Column that is most favorable for the AI, Score of column)
+    """
 
     valid_locations = connect4_utils.get_valid_locations(board)
     is_terminal = is_terminal_node(board)

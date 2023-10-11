@@ -9,6 +9,14 @@ import time
 
 
 def run_game(depth, max_waiting_time):
+    """
+    Is called when the game is run and has all the functions related to the UI.
+    Contains the game loop.
+
+    Args:
+        depth: The maximum depth chosen by player
+        max_waiting_time: The maximum time the player is willing to wait for the AI's calculations to complete.
+    """
     def create_board():
         board = np.zeros((constants.ROW_COUNT, constants.COLUMN_COUNT))
         return board
@@ -100,7 +108,9 @@ def run_game(depth, max_waiting_time):
                         draw_board(board)
 
 
-        # AI Input
+        """
+        Calls the iterative deepening function, which then calls the minimax function etc.
+        """
         if turn == constants.AI and not game_over:
 
             # Run minimax with chosen depth
@@ -110,7 +120,7 @@ def run_game(depth, max_waiting_time):
             # print(col, minimax_score)
             end = time.time()
 
-            print("Elapsed time:", start - end)
+            print("Elapsed time:", end - start)
 
             if connect4_utils.is_valid_location(board, col):
                 # pygame.time.wait(500)
