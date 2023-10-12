@@ -9,6 +9,9 @@ import src.connect4_utils as connect4_utils
 class TestConnect4(unittest.TestCase):
 
     def test_ai_chooses_crucial_column_two_pieces(self):
+        """
+        Tests if AI chooses the column that is crucial to avoid loss (2 player pieces)
+        """
         board = np.zeros((6, 7))
         board[5][3] = 1
         board[4][3] = 2
@@ -19,6 +22,9 @@ class TestConnect4(unittest.TestCase):
         self.assertTrue(col in [2, 5])
 
     def test_ai_chooses_winning_column(self):
+        """
+        Tests if AI chooses the column that wins the game automatically
+        """
         board = np.zeros((6, 7))
         board[5][0] = 1
         board[5][3] = 2
@@ -31,6 +37,9 @@ class TestConnect4(unittest.TestCase):
         self.assertTrue(col, 3)
 
     def test_ai_blocks_players_immediate_win(self):
+        """
+        Tests if AI chooses the column that is crucial to avoid loss (3 player pieces)
+        """
         board = np.zeros((6, 7))
         board[5][0] = 1
         board[4][0] = 1
