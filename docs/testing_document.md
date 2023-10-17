@@ -1,7 +1,7 @@
 # Testing Document
 
 ## Current Testing Coverage
-![Coverage](test_coverage.jpg)
+![Coverage](test_coverage.JPG)
 
 ## Tests
 There are currently four tests. \
