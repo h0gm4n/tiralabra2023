@@ -3,7 +3,8 @@ The program is divided into four python files. Connect4_ai.py has the AI's funct
 Connect4_ui.py has the user interface and the pygame loop. Connect4_utils.py has some of the functionality that several files use.
 Constants.py has all constants. The game is executed through connect4.py.
 
-One major flaw remains in the AI: the minimax algorithm's process time takes a lot longer when focused in the right edge of the board.
+One major flaw remains in the AI: when chosen maximum depth surpasses 7, the calculations are slow. In further development this could be fixed
+by changing the column-checking to start from the middle.
 
 ChatGPT has been used to help implement iterative deepening to the minimax algorithm.
 
