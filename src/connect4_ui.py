@@ -102,6 +102,8 @@ def run_game(depth, max_waiting_time):
                         if connect4_utils.winning_move(board, constants.PLAYER_PIECE):
                             label = myfont.render("Player wins!", 1, constants.RED)
                             screen.blit(label, (200, 10))
+                            restart = restart_font.render("Play again", 1, constants.RED)
+                            screen.blit(restart, (10, 10))
                             game_over_screen = True
 
                         turn += 1
@@ -114,13 +116,13 @@ def run_game(depth, max_waiting_time):
         """
         Calls the iterative deepening function, which then calls the minimax function etc.
         """
-        if turn == constants.AI and not game_over:
+        if turn == constants.AI and not game_over and not game_over_screen:
 
             # Run minimax with chosen depth
             start = time.time()
             # col, minimax_score = connect4_ai.minimax(board, depth, -math.inf, math.inf, True)
             col, minimax_score = connect4_ai.iterative_deepening(board, depth, max_waiting_time)
-            print(col, minimax_score)
+            print("Best column:", col, "Score:", minimax_score)
             end = time.time()
 
             print("Elapsed time:", end - start)
